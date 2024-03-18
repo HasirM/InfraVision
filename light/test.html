@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle Classes</title>
+    <style>
+        /* Initially all elements are visible */
+        .resolved, .pending, .in-progress {
+            display: block;
+        }
+
+        /* Initially hide elements with hidden class */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li onclick="showClass('resolved')">Resolved</li>
+        <li onclick="showClass('pending')">Pending</li>
+        <li onclick="showClass('in-progress')">In Progress</li>
+        <li onclick="showAll()">Show All</li>
+    </ul>
+    <!-- Initially visible divs with hidden class -->
+    <div class="resolved">Resolved Cases</div>
+    <div class="pending">Pending Cases</div>
+    <div class="in-progress">Cases In Progress</div>
+
+    <script>
+        function showClass(className) {
+            var divs = document.querySelectorAll('.resolved, .pending, .in-progress');
+            for (var i = 0; i < divs.length; i++) {
+                if (divs[i].classList.contains(className)) {
+                    divs[i].classList.remove('hidden');
+                } else {
+                    divs[i].classList.add('hidden');
+                }
+            }
+        }
+
+        function showAll() {
+            var divs = document.querySelectorAll('.resolved, .pending, .in-progress');
+            for (var i = 0; i < divs.length; i++) {
+                divs[i].classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
