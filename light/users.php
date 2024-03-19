@@ -134,8 +134,8 @@ if (isset($_GET['searchInput'])) {
                                     <button onclick="showUpdate()">Edit Role</button>
 
                                     <!-- Modal for updating role -->
-                                    <div id="updateModal" class="user-modal">
-                                        <div class="user-modal-content">
+                                    <div id="updateModal" class="modal">
+                                        <div class="modal-content">
                                             <span class="close" onclick="hideUpdateModal()">&times;</span>
                                             <form id="updateForm" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                                                 <input type="hidden" name="userId" value="<?php echo $user['user_id']; ?>">
