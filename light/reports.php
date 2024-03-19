@@ -34,7 +34,7 @@ if (isset($_GET['searchInput'])) {
     } else {
         $reports = []; // No reports found
         $message = '<div class="message" data-aos="fade-up">
-        <h3>Sorry, You have no submissions so far. <br><a href="submit-report.php">Click here</a> to submit your first road damage report.</h3>
+        <h3>Sorry, There have been no submissions so far. <br><a href="submit-report.php">Click here</a> to submit the first road damage report.</h3>
     </div>';
     }
 } else {
@@ -52,7 +52,7 @@ if (isset($_GET['searchInput'])) {
     } else {
         $reports = []; // No reports found
         $message = '<div class="message" data-aos="fade-up">
-        <h3>Sorry, You have no submissions so far. <br><a href="submit-report.php">Click here</a> to submit your first road damage report.</h3>
+        <h3>Sorry, There have been no submissions so far. <br><a href="submit-report.php">Click here</a> to submit the first road damage report.</h3>
     </div>';
     }
 }

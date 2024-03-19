@@ -28,18 +28,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+// Check if search input is provided
+if (isset($_GET['searchInput'])) {
+    $searchInput = $_GET['searchInput'];
 
-// Fetch users from the database
-$sql = "SELECT * FROM users WHERE role != 'admin'";
-$result = $conn->query($sql);
+    // Fetch reports from the database based on search criteria
+    $sql = "SELECT * FROM users WHERE role != 'admin' AND (user_id LIKE '%$searchInput%' OR username LIKE '%$searchInput%' OR email LIKE '%$searchInput%' OR phone_number LIKE '%$searchInput%' OR role LIKE '%$searchInput%')";
+    // Check if there are any reports matching the search criteria
+    $result = $conn->query($sql);
 
-// Check if there are any users
-if ($result->num_rows > 0) {
-    // Store users in an array
-    $users = $result->fetch_all(MYSQLI_ASSOC);
+    // Check if there are any users
+    if ($result->num_rows > 0) {
+        // Store users in an array
+        $users = $result->fetch_all(MYSQLI_ASSOC);
+    } else {
+        $users = []; // No reports found
+        $message = '<div class="message" data-aos="fade-up">
+        <h3>Sorry, There are no registered accounts so far. <br><a href="index.php">Click here</a> to go to home.</h3>
+    </div>';
+    }
 } else {
-    $users = []; // No users found
+    // Fetch all reports from the database if no search input is provided
+    $searchInput = '';
+    // Fetch users from the database
+    $sql = "SELECT * FROM users WHERE role != 'admin'";
+    $result = $conn->query($sql);
+
+    // Check if there are any users
+    if ($result->num_rows > 0) {
+        // Store users in an array
+        $users = $result->fetch_all(MYSQLI_ASSOC);
+    } else {
+        $users = []; // No users found
+        $message = '<div class="message" data-aos="fade-up">
+        <h3>Sorry, There are no registered accounts so far. <br><a href="index.php">Click here</a> to go to home.</h3>
+    </div>';
+    }
 }
+
 ?>
 
 <?php include 'top-header.php'; ?>
@@ -48,7 +74,7 @@ if ($result->num_rows > 0) {
 <div class="container mt-3 mb-4">
     <div class="col-lg-9 mt-4 mt-lg-0 user-container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 users-container-table">
                 <!-- Display success message -->
                 <?php if (!empty($successMessage)) : ?>
                     <div id="successMessage" class="alert alert-success"><?php echo $successMessage; ?></div>
@@ -57,13 +83,26 @@ if ($result->num_rows > 0) {
                 <?php if (!empty($errorMessage)) : ?>
                     <div id="errorMessage" class="alert alert-danger"><?php echo $errorMessage; ?></div>
                 <?php endif; ?>
-                <div class="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-sm">
+
+                <div class="wrapper" data-aos="zoom-in">
+                    <form method="GET" action="">
+                        <div class="search-input">
+                            <input type="text" id="searchInput" name="searchInput" value="<?= $searchInput;?>" placeholder="Type to search..">
+                            <div class="icon">
+                                    <button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </form> 
+                </div>
+
+
+                <div data-aos="fade-up" class="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-sm">
                     <table class="table manage-candidates-top mb-0">
                         <thead>
                             <tr>
-                                <th>Username</th>
+                                <th class="text-center">Username</th>
                                 <th class="text-center">Status</th>
-                                <th class="action text-right">Action</th>
+                                <th class="action text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -72,7 +111,7 @@ if ($result->num_rows > 0) {
                                 <tr class="candidates-list">
                                     <td class="title">
                                         <div class="thumb">
-                                            <img class="img-fluid" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="">
+                                            <img class="img-fluid" src="../assets/images/me.png" alt="">
                                         </div>
                                         <div class="candidate-list-details">
                                             <div class="candidate-list-info">
@@ -91,16 +130,16 @@ if ($result->num_rows > 0) {
                                     <td class="candidate-list-favourite-time text-center">
                                         <span class="candidate-list-time order-1"><?php echo $user['role']; ?></span>
                                     </td>
-                                    <td>
+                                    <td class="user-action-btn">
                                     <button onclick="showUpdate()">Edit Role</button>
 
                                     <!-- Modal for updating role -->
-                                    <div id="updateModal" class="modal">
-                                        <div class="modal-content">
+                                    <div id="updateModal" class="user-modal">
+                                        <div class="user-modal-content">
                                             <span class="close" onclick="hideUpdateModal()">&times;</span>
                                             <form id="updateForm" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                                                 <input type="hidden" name="userId" value="<?php echo $user['user_id']; ?>">
-                                                <select name="newRole">
+                                                <select class="user-role-select" name="newRole">
                                                 <?php 
                                                     // Display the current role as the first option
                                                     echo '<option value="' . $user['role'] . '" selected>' . $user['role'] . '</option>';
