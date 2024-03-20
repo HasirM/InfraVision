@@ -470,6 +470,11 @@ button.hidden {
     justify-content: flex-end !important;
 }
 
+.header-logo{
+    width: 250px;
+    height: 100px;
+}
+
 .close {
     position: absolute;
     right: 15px;

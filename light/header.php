@@ -48,7 +48,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
             <div class="container">
                 <div class="gx-row d-flex align-items-center justify-content-between flex-row">
                     <a href="index.php" class="logo">
-                        <img src="../assets/images/logo-dark.svg" alt="Logo">
+                        <img src="../assets/images/logo-dark.svg" class="header-logo" alt="Logo">
                     </a>
 
                     <nav class="navbar">
