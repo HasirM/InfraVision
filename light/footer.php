@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="footer-content text-center">
                     <a href="index.php" class="logo">
-                        <img src="../assets/images/logo-dark.svg" alt="Logo">
+                        <img src="../assets/images/logo-dark.svg" class="header-logo" alt="Logo">
                     </a>
 
                     <ul class="footer-menu">
