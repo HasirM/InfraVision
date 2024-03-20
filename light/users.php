@@ -2,6 +2,17 @@
 // Include database connection
 require_once '../db.php';
 
+// Check if the user is not logged in, redirect to login page
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header('location: ../login/signin.php');
+    exit;
+}
+
+if ($_SESSION['role'] == 'user' || $_SESSION['role'] == 'govt') {
+    header('location: index.php');
+    exit;
+}
+
 // Initialize variables for success and error messages
 $successMessage = "";
 $errorMessage = "";

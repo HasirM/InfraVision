@@ -10,6 +10,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     exit;
 }
 
+if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'govt') {
+    header('location: index.php');
+    exit;
+}
+
 $role = $_SESSION['role'];
 $id = $_SESSION['user_id'];
 

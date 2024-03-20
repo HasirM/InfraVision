@@ -9,6 +9,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     exit;
 }
 
+if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'govt') {
+    header('location: index.php');
+    exit;
+}
+
 ?>
 
 <?php include 'top-header.php' ; include 'header.php'; ?>

@@ -150,40 +150,101 @@ if ($result_total && $result_resolved && $result_pending && $result_in_progress)
                     </div>
                 </div>
                 <div class="row mt-24">
-                    <div class="col-md-6" data-aos="zoom-in">
-                            
-                        <div class="about-client-box info-box shadow-box">
-                            <div class="clients d-flex align-items-start gap-24 justify-content-center">
-                                <div class="client-item">
-                                    <h1><?php echo $totalReports; ?></h1>
-                                    <p>Total <br>Reports</p>
-                                </div>
 
-                                <div class="client-item">
-                                    <h1><?php echo $resolvedReports; ?></h1>
-                                    <p>Resolved <br>Reports</p>
-                                </div>
+                        <?php if ($role == 'admin'): ?>
+                            <div class="col-md-12" data-aos="zoom-in">
+                                <div class="about-client-box info-box shadow-box">
+                                    <div class="clients d-flex align-items-start gap-24 justify-content-center">
+                                        <div class="client-item">
+                                            <h1><?php echo $totalReports; ?></h1>
+                                            <p>Total <br>Reports</p>
+                                        </div>
 
-                                <div class="client-item">
-                                    <h1><?php echo $inProgressReports; ?></h1>
-                                    <p>In Progress<br>Reports</p>
+                                        <div class="client-item">
+                                            <h1><?php echo $resolvedReports; ?></h1>
+                                            <p>Resolved <br>Reports</p>
+                                        </div>
+
+                                        <div class="client-item">
+                                            <h1><?php echo $inProgressReports; ?></h1>
+                                            <p>In Progress<br>Reports</p>
+                                        </div>
+
+                                        <div class="client-item">
+                                            <h1><?php echo $pendingReports; ?></h1>
+                                            <p>Pending<br>Reports</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        <?php elseif($role == 'govt'): ?>
+                            <div class="col-md-9" data-aos="zoom-in">    
+                                <div class="about-client-box info-box shadow-box">
+                                    <div class="clients d-flex align-items-start gap-24 justify-content-center">
+                                        <div class="client-item">
+                                            <h1><?php echo $totalReports; ?></h1>
+                                            <p>Total <br>Reports</p>
+                                        </div>
 
-                    </div>
-                    <div class="col-md-6" data-aos="zoom-in">
-                            
-                        <div class="about-contact-box info-box shadow-box">
-                            <a class="overlay-link" href="submit-report.php"></a>
-                            <img src="../assets/images/icon2-2.png" alt="Icon" class="star-icon">
-                            <h1>Make a Difference,<br> <span>Report Now.</span></h1>
-                            <a href="submit-report.php" class="about-btn">
-                                <img src="../assets/images/icon-2.svg" alt="Button">
-                            </a>
-                        </div>
+                                        <div class="client-item">
+                                            <h1><?php echo $resolvedReports; ?></h1>
+                                            <p>Resolved <br>Reports</p>
+                                        </div>
 
-                    </div>
+                                        <div class="client-item">
+                                            <h1><?php echo $inProgressReports; ?></h1>
+                                            <p>In Progress<br>Reports</p>
+                                        </div>
+
+                                        <div class="client-item">
+                                            <h1><?php echo $pendingReports; ?></h1>
+                                            <p>Pending<br>Reports</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3" data-aos="zoom-in">
+                                <div class="about-contact-box info-box shadow-box">
+                                    <a class="overlay-link" href="about.php"></a>
+                                    <img src="../assets/images/icon2-2.png" alt="Icon" class="star-icon">
+                                    <h1>Know<br> <span>More.</span></h1>
+                                    <a href="about.php" class="about-btn">
+                                        <img src="../assets/images/icon-2.svg" alt="Button">
+                                    </a>
+                                </div>
+                            </div>
+                        <?php else: ?>
+                            <div class="col-md-6" data-aos="zoom-in">    
+                                <div class="about-client-box info-box shadow-box">
+                                    <div class="clients d-flex align-items-start gap-24 justify-content-center">
+                                        <div class="client-item">
+                                            <h1><?php echo $totalReports; ?></h1>
+                                            <p>Total <br>Reports</p>
+                                        </div>
+
+                                        <div class="client-item">
+                                            <h1><?php echo $resolvedReports; ?></h1>
+                                            <p>Resolved <br>Reports</p>
+                                        </div>
+
+                                        <div class="client-item">
+                                            <h1><?php echo $inProgressReports; ?></h1>
+                                            <p>In Progress<br>Reports</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6" data-aos="zoom-in">
+                                <div class="about-contact-box info-box shadow-box">
+                                    <a class="overlay-link" href="submit-report.php"></a>
+                                    <img src="../assets/images/icon2-2.png" alt="Icon" class="star-icon">
+                                    <h1>Make a Difference,<br> <span>Report Now.</span></h1>
+                                    <a href="submit-report.php" class="about-btn">
+                                        <img src="../assets/images/icon-2.svg" alt="Button">
+                                    </a>
+                                </div>
+                            </div>
+                        <?php endif; ?>
                 </div>
             </div>
         </section>

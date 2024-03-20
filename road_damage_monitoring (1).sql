@@ -36,14 +36,14 @@ CREATE TABLE IF NOT EXISTS `reports` (
   `duration` varchar(50) DEFAULT NULL,
   `severity` varchar(50) DEFAULT NULL,
   `landmark` varchar(255) DEFAULT NULL,
-  `status` enum('Pending','In Progress','Resolved') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'Pending',
+  `status` enum('Pending','In Progress','Resolved') CHARACTER SET utf8mb4 DEFAULT 'Pending',
   `submitted_by` varchar(255) DEFAULT NULL,
   `submission_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `last_updated_on` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `confirm_image` varchar(255) DEFAULT NULL,
   `last_updated_by` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -58,12 +58,12 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
   `phone_number` varchar(20) DEFAULT NULL,
-  `role` enum('user','admin','govt') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'user',
+  `role` enum('user','admin','govt') CHARACTER SET utf8mb4 NOT NULL DEFAULT 'user',
   `reset_token` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Dumping data for table `users`
