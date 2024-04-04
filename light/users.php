@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // Include database connection
 require_once '../db.php';
 
@@ -18,7 +20,7 @@ $successMessage = "";
 $errorMessage = "";
 
 // Function to update user role
-function updateUserRole($userId, $newRole, $conn) {
+function updateUserRole($userId, $newRole, $conn) {     
     $sql = "UPDATE users SET role = '$newRole' WHERE user_id = $userId";
     if ($conn->query($sql) === TRUE) {
         return true;

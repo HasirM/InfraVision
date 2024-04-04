@@ -3,14 +3,18 @@ session_start();
 
 // Check if the user is not logged in, redirect to login page
 
-if (isset($role)) {
+// Check if the user is logged in
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+    // User is logged in
     $role = $_SESSION['role'];
     $id = $_SESSION['user_id'];
-
-    // Check the role of the logged-in user
-    exit;
-}else{
+    $username = $_SESSION['username'];
+    $button = '<a href="logout.php" class="theme-btn">Logout</a>';
+} else {
+    $button = '<div class="nav-buttons"><a href="../login/signUp.php" class="theme-btn">Sign Up</a> <a href="../login/signIn.php" class="theme-btn">Sign In</a></div>';
+    $username = 'Guest!';
     $role = 'guest';
+
 }
 
 // Include database connection
@@ -113,7 +117,7 @@ if(isset($report['confirm_image'])){
                     <div data-aos="zoom-in">
                         <div class="about-image-box shadow-box">
                             <div class="image-inner">
-                                <img src="../<?php echo $report['image']; ?>" alt="Report Image">
+                                <img src="<?php echo $report['image']; ?>" alt="Report Image">
                             </div>
 
                             

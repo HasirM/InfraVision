@@ -89,6 +89,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Sign Up</title>
 
     <!-- Font Icon -->
+    <link rel="icon" href="../assets/images/logo.svg" type="image/icon type">
+
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
 
     <!-- Main css -->
@@ -161,5 +163,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- JS -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="js/main.js"></script>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</body>
 </html>

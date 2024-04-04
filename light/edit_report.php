@@ -7,10 +7,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     exit;
 }
 
-if ($_SESSION['role'] == 'user') {
-    header('location: index.php');
-    exit;
-}
 
 require_once '../db.php';
 
@@ -44,6 +40,13 @@ if (isset($_GET['id'])) {
     echo "Report ID is not provided.";
     exit;
 }
+
+
+if ($_SESSION['role'] == 'user' && $_SESSION['user_id'] != $report['submitted_by']) {
+    header('location: index.php');
+    exit;
+}
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $additional_info = $_POST['additional_info'];
@@ -106,6 +109,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 
+// Check the value of $report['status'] and set $status accordingly
+switch ($report['status']) {
+    case 'Pending':
+        $status = '<div class="status-btn pending">Pending</div>';
+        break;
+    case 'In Progress':
+        $status = '<div class="status-btn inprogress">In Progress</div>';
+        break;
+    case 'Resolved':
+        $status = '<div class="status-btn resolved">Resolved</div>';
+        break;
+    default:
+        // Handle the case if $report['status'] is not any of the expected values
+        $status = '<div class="status-btn unknown">Unknown</div>';
+        break;
+}
+
+
 $submitted_id=$report['submitted_by'];
 if (isset($submitted_id)) {
     $submit_username = $users[$submitted_id]['username']; 
@@ -142,7 +163,7 @@ if (isset($updated_id)) {
                     <div data-aos="zoom-in">
                         <div class="about-image-box shadow-box">
                             <div class="image-inner">
-                                <img src="../<?php echo $report['image']; ?>" alt="Report Image">
+                                <img src="<?php echo $report['image']; ?>" alt="Report Image">
                             </div>
                         </div>
                     </div>
@@ -152,18 +173,25 @@ if (isset($updated_id)) {
                         <div class="about-details-inner shadow-box">
                             <img src="../assets/images/icon2-2.png" alt="Star">
                             
-                            <div class="status-btn">
-                                <select id="status" name="status">
-                                    <option value="Pending" <?php if ($report['status'] == 'Pending') echo 'selected'; ?>>Pending</option>
-                                    <option value="In Progress" <?php if ($report['status'] == 'In Progress') echo 'selected'; ?>>In Progress</option>
-                                    <option value="Resolved" <?php if ($report['status'] == 'Resolved') echo 'selected'; ?>>Resolved</option>
-                                </select>
-                            </div>
-                            <!-- <div class="status-btn pending" readonly><?php echo $report['status']; ?></div> -->
-                            <br><br>
-                            <!-- <h1><?php echo $report['severity']; ?></h1> -->
-                            <h1><input type="text" id="severity" name="severity" value="<?php echo $report['severity']; ?>"></h1>
+                            <?php if ($role == 'user'): ?>
+                                <?php echo $status; ?>
+                                
+                                <br><br>
+                                
+                            <?php else: ?>
+                                <div class="status-btn">
+                                    <select id="status" name="status">
+                                        <option value="Pending" <?php if ($report['status'] == 'Pending') echo 'selected'; ?>>Pending</option>
+                                        <option value="In Progress" <?php if ($report['status'] == 'In Progress') echo 'selected'; ?>>In Progress</option>
+                                        <option value="Resolved" <?php if ($report['status'] == 'Resolved') echo 'selected'; ?>>Resolved</option>
+                                    </select>
+                                </div>
+                            <?php endif; ?>
 
+                            <!-- <h1><?php echo $report['duration']; ?></h1> -->
+                            <h1><input type="text" id="duration" name="duration" value="<?php echo $report['duration']; ?>"></h1>
+
+                                                    
                         </div>
 
                     </div>
@@ -198,9 +226,9 @@ if (isset($updated_id)) {
                                             </p>
                                         </li>
                                         <li>
-                                            <h2>Duration</h2>
+                                            <h2>Impact/Severity of Damage</h2>
                                             <p class="type">
-                                                <input type="text" id="duration" name="duration" value="<?php echo $report['duration']; ?>">
+                                                <input type="text" id="severity" name="severity" value="<?php echo $report['severity']; ?>">
 
                                             </p>
                                         </li>
@@ -214,7 +242,7 @@ if (isset($updated_id)) {
                                         <li>
                                             <h2>Additional Info</h2>
                                             <p class="type">
-                                            <textarea id="additional_info" name="additional_info" ><?php echo $report['info']; ?></textarea>
+                                            <textarea rows='10' cols='50' id="additional_info" name="additional_info" ><?php echo $report['info']; ?></textarea>
                                             </p>
                                         </li>
                                     </ul>

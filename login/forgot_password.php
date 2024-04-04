@@ -67,6 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Forgot Password</title>
 
     <!-- Font Icon -->
+    <link rel="icon" href="../assets/images/logo.svg" type="image/icon type">
+ 
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
 
     <!-- Main css -->
@@ -96,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                             </div>
                             <div class="form-group">
-                                <label for="new_password"><i class="zmdi zmdi-phone"></i></label>
+                            <label for="confirm_password"><i class="zmdi zmdi-lock"></i></label>
                                 <input type="password" name="new_password" id="new_password" placeholder="Your New Password"/>
                                 <span><?php echo $new_password_err; ?></span>
 

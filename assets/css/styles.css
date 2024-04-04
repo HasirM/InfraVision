@@ -521,3 +521,15 @@ td.user-action-btn {
 .user-role-select{
     padding: 7px;
 }
+
+img.image {
+    width: 320px;
+    height: 100%;
+}
+
+.profile-img {
+    width: 370px;
+    height: 224px !important;
+    display: flex;
+    align-items: center;
+}

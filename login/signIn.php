@@ -110,6 +110,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Sign In</title>
 
     <!-- Font Icon -->
+    <link rel="icon" href="../assets/images/logo.svg" type="image/icon type">
+
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
 
     <!-- Main css -->

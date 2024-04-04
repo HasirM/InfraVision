@@ -56,8 +56,8 @@ if ($result_total && $result_resolved && $result_pending && $result_in_progress)
                     <div class="col-md-6" data-aos="zoom-in">
                         <div class="about-me-box shadow-box">
                             <a class="overlay-link" href="#"></a>
-                            <div class="img-box">
-                                <img src="../assets/images/me.png" alt="About Me">
+                            <div class="profile-img">
+                                <img src="../assets/images/profile-logo.png" alt="About Me">
                             </div>
                             <div class="infos">
                                  <p>STREAMLINING REPORTS, EMPOWERING ACTION.</p>

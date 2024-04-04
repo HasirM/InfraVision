@@ -136,7 +136,7 @@ if (isset($_GET['searchInput'])) {
                                 <div class="project-item shadow-box">
                                     <a class="overlay-link" onclick="viewReport(<?php echo $report['id']; ?>)"></a>
                                     <div class="project-img">
-                                        <img src="../<?php echo $report['image']; ?>" alt="Project">
+                                        <img src="<?php echo $report['image']; ?>" alt="Project">
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between">
                                         <div class="project-info">

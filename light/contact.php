@@ -10,14 +10,15 @@
         <!-- Contact -->
         <section class="contact-area">
             <div class="container">
-                <div class="gx-row d-flex justify-content-between gap-24">
-                    <div class="contact-infos">
+                <div class="gx-row d-flex justify-content-between gap-24 align-items-end">
+                    <img data-aos="zoom-in"class="image" src="../assets/images/contact-man-3d.png" alt="Icon"/>
+                   <!-- <div class="contact-infos">
                         <h3 data-aos="fade-up">Contact Info</h3>
                         <ul class="contact-details">
                             <li class="d-flex align-items-center" data-aos="zoom-in">
                                 <div class="icon-box shadow-box">
                                     <i class="iconoir-mail"></i>
-                                </div>
+                                </div>                       
                                 <div class="right">
                                     <span>MAIL us</span>
                                     <h4>info@bluebase.com</h4>
@@ -53,12 +54,15 @@
                             <li><a class="shadow-box" href="#"><i class="iconoir-twitter"></i></a></li>
                             <li><a class="shadow-box" href="#"><i class="iconoir-instagram"></i></a></li>
                         </ul>
-                    </div>
+                    </div> -->
 
                     <div data-aos="zoom-in" class="contact-form">
                         <div class="shadow-box">
                             <img src="../assets/images/icon3-2.png" alt="Icon">
                             <h1>Let’s work <span>together.</span></h1>
+                            <div class="para">
+                            Please do not report problems through this form; messages go to the team behind this site, not a council. To report a problem, <a href="index.php"> Click here.</a> 
+                            </div></br>
                             <form method="POST" action="../light/mailer.php">
                                 <div class="alert alert-success messenger-box-contact__msg" style="display: none" role="alert">
                                     Your message was sent successfully.
@@ -82,7 +86,7 @@
                         </div>
                     </div>
                     
-                </div>
+                </div> 
             </div>
         </section>
 
