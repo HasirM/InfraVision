@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Inference</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        /* Your CSS styles here */
+    </style>
+</head>
+<body>
+
+<!-- Input field for Base64 image -->
+<label for="base64Image">Enter Base64 Image:</label><br>
+<textarea id="base64Image" rows="4" cols="50"></textarea><br>
+
+<!-- Button to trigger inference -->
+<button id="runInference">Run Inference</button><br>
+
+<!-- Output container -->
+<div id="outputContainer"></div>
+
+<script>
+    // Function to handle inference
+    var infer = function() {
+        $('#outputContainer').html("Inferring...");
+
+        // Get base64 image from input field
+        var base64image = $('#base64Image').val();
+
+        // Prepare settings for AJAX request
+        var settings = {
+            method: "POST",
+            url: "https://detect.roboflow.com/pothole-jujbl/1?api_key=atX07olX4RozfLzMxIx9&format=json",
+            data: base64image
+        };
+
+        // Make AJAX request
+        $.ajax(settings).then(function(response) {
+
+            console.log('Settings sent to API:', settings);
+            // Process response
+            if (response && response.predictions && response.predictions.length > 0) {
+                var predictions = response.predictions;
+                var classes = predictions.map(function(prediction) {
+                    return prediction.class;
+                });
+                var uniqueClasses = Array.from(new Set(classes));
+
+                // Display classes in output container
+                var classList = $('<ul>');
+                uniqueClasses.forEach(function(className) {
+                    var listItem = $('<li>').text(className);
+                    classList.append(listItem);
+                });
+                $('#outputContainer').html(classList);
+            } else {
+                $('#outputContainer').html("No registered damages found. Please check your image. If issue persists please contact the admin. thanks");
+            }
+        }).fail(function() {
+            $('#outputContainer').html("Error loading response. Please try again.");
+        });
+    };
+
+    // Run inference when button is clicked
+    $('#runInference').click(function() {
+        infer();
+    });
+</script>
+
+</body>
+</html>

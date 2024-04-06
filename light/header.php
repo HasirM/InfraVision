@@ -42,6 +42,8 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     <link rel="stylesheet" href="../assets/css/style-light.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <script src="../assets/js/typewriter.js"></script>
+
 </head>
 <body>
  

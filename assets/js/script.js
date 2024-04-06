@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const damageDuration = document.getElementById('damageDuration');
     const damageSeverity = document.getElementById('damageSeverity');
     const landmark = document.getElementById('landmark');
+    const outputContainer = document.getElementById('outputContainer');
+    const errorContainer = document.getElementById('errorContainer');
+
 
     // Function to get today's date
     function getCurrentDate() {
@@ -61,10 +64,77 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     });
 
-    proceedBtn.addEventListener('click', () => {
+    function infer() {
         confirmationContainer.classList.add('hidden');
-        reportForm.classList.remove('hidden');
-        date.textContent = getCurrentDate();
+        outputContainer.classList.remove('hidden');
+        // outputContainer.innerHTML = "Inferring...";
+    
+        // Get base64 image from input field
+        var base64image = capturedImage.src;
+    
+        // Prepare settings for AJAX request
+        var settings = {
+            method: "POST",
+            url: "https://detect.roboflow.com/pothole-jujbl/1?api_key=atX07olX4RozfLzMxIx9&format=json",
+            data: base64image
+        };
+    
+        // Make AJAX request
+        $.ajax(settings).then(function(response) {
+    
+            console.log('Settings sent to API:', settings);
+            
+            // Process response
+            if (response && response.predictions && response.predictions.length > 0) {
+                var predictions = response.predictions;
+                var classes = predictions.map(function(prediction) {
+                    return prediction.class;
+                });
+                var uniqueClasses = Array.from(new Set(classes));
+
+                // Display classes in output container
+                var classList = $('<ul>');
+                uniqueClasses.forEach(function(className) {
+                    var listItem = $('<li>').text(className);
+                    classList.append(listItem);
+                });
+
+                outputContainer.classList.add('hidden');
+
+                // Set value of input field to the first class name
+                var firstClassName = uniqueClasses[0];
+                damageDuration.value = firstClassName;
+
+                // Remove hidden class from report form
+                reportForm.classList.remove('hidden');
+
+                date.textContent = getCurrentDate();
+            } else {
+                outputContainer.classList.add('hidden');
+                errorContainer.classList.remove('hidden');
+                // Display error message and redirect to index page
+                setTimeout(function() {
+                    window.location.href = "index.php"; // Change to the actual URL of your index page
+                }, 5000);
+            }
+        }).fail(function() {
+            outputContainer.classList.add('hidden');
+            errorContainer.classList.remove('hidden');
+            // Display error message and redirect to index page
+
+            errorContainer.innerHTML = "Error loading response. Please try again.";
+
+            setTimeout(function() {
+                window.location.href = "index.php"; // Change to the actual URL of your index page
+            }, 5000);
+        });
+    };
+    
+    
+    proceedBtn.addEventListener('click', () => {
+        infer();
+    
+        // Get user location
         navigator.geolocation.getCurrentPosition(position => {
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
@@ -84,8 +154,8 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error getting location:', error);
             location.textContent = 'Error getting location';
         });
-        
     });
+    
 
     retakeImageBtn.addEventListener('click', () => {
         confirmationContainer.classList.remove('hidden');

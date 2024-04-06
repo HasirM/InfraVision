@@ -18,7 +18,7 @@ if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'govt') {
 
 <?php include 'top-header.php' ; include 'header.php'; ?>
 
-<div class="cameraContainer">
+<div class="cameraContainer"  data-aos="zoom-in">
     <video id="cameraFeed" autoplay></video>
      <button id="captureBtn" class="hidden">Capture Image</button>
 </div>
@@ -30,6 +30,28 @@ if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'govt') {
             </div>
         </div>
 
+        <!-- Output container -->
+        <div id="outputContainer" data-aos="zoom-in" class="hidden">
+            <div class="custom-loader"></div>
+            <div class="loading-text">
+            <h3>
+                <a href="" class="typewrite" data-period="2000" data-type='[ "AI Model Running,", "Please Wait."]'>
+                    <span class="wrap"></span>
+                </a>
+                </h3>
+            </div>
+        </div>
+
+        <div id="errorContainer" class="hidden">
+        <i class='fas fa-exclamation-circle' style='font-size:80px;color:red'></i>
+            <div class="error-text">
+            <h3>
+            No registered damages found. Please check your image.</h3> <h5> If issue still persists please contact admin. </h5> <h6 style="color:gray">redirecting...</h6>
+                
+            </div>
+        </div>
+
+        
         <div class="container px-5 my-5">
     <div id="reportForm" class="hidden">
          <h2>Report Form</h2>
@@ -48,7 +70,7 @@ if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'govt') {
             <label for="landmark">Landmark</label>
         </div>
         <div class="form-floating mb-3">
-            <input class="form-control" id="damageDuration" type="text" placeholder="Type of Damage" data-sb-validations="" />
+            <input class="form-control" id="damageDuration" type="text" value="" placeholder="Type of Damage" data-sb-validations="" />
             <label for="damageDuration">Type of Damage</label>
         </div>
         <div class="form-floating mb-3">
@@ -96,5 +118,6 @@ if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'govt') {
               
         </form>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <?php include 'footer.php';?>   
