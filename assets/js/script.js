@@ -75,7 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Prepare settings for AJAX request
         var settings = {
             method: "POST",
-            url: "https://detect.roboflow.com/pothole-jujbl/1?api_key=atX07olX4RozfLzMxIx9&format=json",
+            // url: "https://detect.roboflow.com/pothole-jujbl/1?api_key=atX07olX4RozfLzMxIx9&format=json",
+            url: "https://detect.roboflow.com/road-defect-3/8?api_key=atX07olX4RozfLzMxIx9&format=json",
             data: base64image
         };
     
